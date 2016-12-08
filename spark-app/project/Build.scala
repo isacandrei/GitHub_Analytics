@@ -12,6 +12,6 @@ object ScalaBuild extends Build {
     mainClass in Compile := Some("rugds.sparkapp.SparkappMain"),
     libraryDependencies ++= Seq(
         "org.apache.spark" %% "spark-core" % "2.0.2"
-    ) ++ logViaLog4j
+    )
   )
 }
