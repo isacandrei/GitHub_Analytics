@@ -1,9 +1,0 @@
-*.iml
-*.ipr
-*.iws
-
-*.class
-*.log
-
-target/
-.idea/
