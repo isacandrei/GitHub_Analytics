@@ -15,7 +15,7 @@ trait ExampleEntityJsonProtocol extends DefaultJsonProtocol with SprayJsonSuppor
 }
 
 /**
-  * = ExampleRestClient Module =
+  * = GitRestClient Module =
   */
 trait gitRestClient {
     this: Service with RestClient =>

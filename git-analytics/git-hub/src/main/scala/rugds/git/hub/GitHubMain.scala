@@ -1,8 +1,6 @@
 package rugds.git.hub
 
-import rugds.git.hub.{gitRestClient}
 import rugds.rest.client.RestClient
-import rugds.rest.server.RestServer
 import rugds.service.CoreService
 
 object GitHubMain extends App {

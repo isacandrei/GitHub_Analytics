@@ -6,17 +6,19 @@ object ScalaBuild extends Build {
   val systemCoreV = "0.17.4"
   val sparkVersion = "2.0.2"
 
-  lazy val gitAnalyticsMain = mainProject("git-analytics-root")
-    .aggregate(gitAnalyticsProject)
-      .aggregate(gitHProject)
-      .aggregate(sparkAppProject)
 
+  lazy val gitAnalyticsProject = defineProject(scalaProject, "git-analytics")
+    .dependsOn(gitHubProject)
+    .dependsOn(sparkAppProject) settings (
+    mainClass in Compile := Some("rugds.git.analytics.GitAnalyticsMain"),
+    libraryDependencies ++= Seq(
+      "rugds" %% "service-core" % systemCoreV,
+      "rugds" %% "rest" % systemCoreV
+    )
 
-  lazy val gitAnalyticsProject = defineProject(scalaProject, "git-analytics") settings (
-    mainClass in Compile := Some("rugds.git.analytics.GitAnalyticsMain")
   )
 
-  lazy val gitHProject = defineProject(akkaProject, "git-hub") settings (
+  lazy val gitHubProject = defineProject(akkaProject, "git-hub") settings (
       mainClass in Compile := Some("rugds.git.hub.GitHubMain"),
       libraryDependencies ++= Seq(
         "rugds" %% "service-core" % systemCoreV,
