@@ -22,7 +22,8 @@ object ScalaBuild extends Build {
       mainClass in Compile := Some("rugds.git.hub.GitHubMain"),
       libraryDependencies ++= Seq(
         "rugds" %% "service-core" % systemCoreV,
-        "rugds" %% "rest" % systemCoreV
+        "rugds" %% "rest" % systemCoreV,
+        "org.json4s" %% "json4s-jackson" % "3.5.0"
       ) ++ logViaLog4j
   )
 
