@@ -30,8 +30,10 @@ object ScalaBuild extends Build {
   lazy val sparkAppProject = defineProject(scalaProject, "spark-app") settings (
       mainClass in Compile := Some("rugds.spark.app.SparkAppMain"),
       libraryDependencies ++= Seq(
+        "rugds" %% "service-core" % systemCoreV,
         "org.apache.spark" %% "spark-core" % sparkVersion,
-        "org.apache.spark"  % "spark-mllib_2.11" % sparkVersion
+        "org.apache.spark"  % "spark-mllib_2.11" % sparkVersion,
+        "org.json4s" %% "json4s-jackson" % "3.5.0"
       )
   )
 

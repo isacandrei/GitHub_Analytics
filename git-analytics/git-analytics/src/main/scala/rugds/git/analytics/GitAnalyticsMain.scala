@@ -12,6 +12,6 @@ object GitAnalyticsMain extends App{
       * The ExampleRestClient module provides an easy way to call the URLs
       * made available by the ExampleRestRoute module.
       */
-    gitRestClient.getSomeUrl() // GET ../some/url
+//    gitRestClient.getSomeUrl() // GET ../some/url
   }
 }
