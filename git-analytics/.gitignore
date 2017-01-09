@@ -1,0 +1,12 @@
+*.iml
+*.ipr
+*.iws
+
+*.class
+*.log
+
+target/
+.idea/
+
+#macOS
+.DS_Store
