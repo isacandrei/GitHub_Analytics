@@ -49,9 +49,9 @@ object GitAnalyticsMain extends App{
     })
     println(projectsFinal)
 
-    Tool.writeJson(write(projectsFinal), org)
+    Tool.writeJson(write(projectsFinal), org + "-final")
 
-    sparkAppClient.sparkMagic()
+    sparkAppClient.sparkMagic(org)
 
   }
 

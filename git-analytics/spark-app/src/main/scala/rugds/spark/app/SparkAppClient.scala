@@ -44,12 +44,12 @@ class sparkAppClientImpl {
     arr
   }
 
-  def sparkMagic() = {
+  def sparkMagic(org: String) = {
     val conf = new SparkConf().setAppName("LinearRegressionWithSGDExample").setMaster("local[1]")
     val sc = new SparkContext(conf)
 
     // Load and parse the data
-    val repos = parse(Tool.readJson("rug-wacc")).extract[Seq[Repo]]
+    val repos = parse(Tool.readJson(org + "-final")).extract[Seq[Repo]]
 
     val lines = Tool.readJson("rug-wacc-grades").split("\n")
     val grades = mutable.Map[String, Float]()
@@ -68,13 +68,14 @@ class sparkAppClientImpl {
     val model = LinearRegressionWithSGD.train(sc.parallelize(parsedData), numIterations, stepSize)
 
     // Evaluate model on training examples and compute training error
-    val valuesAndPreds = parsedData.map { point =>
-      val prediction = model.predict(point.features)
-      println(point.label + " " + prediction)
-      (point.label, prediction)
+    val result = repos.map{ r =>
+      val prediction = model.predict(Vectors.dense(parseMyRepo(r).map(_.toDouble)))
+      println(r.name + " " + prediction)
+      (r.name, prediction)
     }
 
-    println(valuesAndPreds)
+    println(result)
+    Tool.writeJson(result.toString(),org + "-results")
     sc.stop()
   }
 }

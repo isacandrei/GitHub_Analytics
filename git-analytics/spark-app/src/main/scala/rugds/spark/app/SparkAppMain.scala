@@ -1,5 +1,8 @@
 package rugds.spark.app
 
+import java.io.File
+
+import com.typesafe.config.ConfigFactory
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
 import rugds.service.CoreService
@@ -7,7 +10,16 @@ import rugds.service.CoreService
 object SparkAppMain extends App{
 
   val service = new CoreService with sparkAppClient {
-    sparkAppClient.sparkMagic()
+
+    val path = new File(".").getCanonicalPath
+
+    val config = ConfigFactory.parseFile(new File(path + "/git-hub/src/main/resources/application.conf"))
+
+    val token = config.getString("gitHub.accessToken")
+
+    val org = config.getString("organisation")
+
+    sparkAppClient.sparkMagic(org)
 
   }
 

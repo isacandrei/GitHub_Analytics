@@ -16,7 +16,6 @@ object ScalaBuild extends Build {
       "rugds" %% "rest" % systemCoreV,
       "org.json4s" %% "json4s-jackson" % "3.5.0"
     )
-
   )
 
   lazy val gitHubProject = defineProject(akkaProject, "git-hub") settings (
