@@ -11,7 +11,6 @@ import org.json4s.jackson.Serialization.write
 
 import scala.collection.mutable.ListBuffer
 
-
 object GitHubMain extends App {
   val service = new CoreService with RestClient with gitRestClient {
 

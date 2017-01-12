@@ -1,6 +1,10 @@
 package rugds.git.hub
 
-import java.io.{BufferedWriter, File, FileWriter}
+import java.io.{BufferedWriter, File, FileWriter, PrintWriter}
+
+import akka.actor.Actor
+
+import scala.io.Source
 
 /**
   * Created by isac on 05/01/2017.
@@ -13,6 +17,9 @@ object Tool {
     val bw = new BufferedWriter(new FileWriter(file))
     bw.write(json)
     bw.close()
+//    new PrintWriter(s"$path/$org.txt") { write(json); close }
+//    Source.fromFile(s"$path/$org.txt").foreach { x => print(x) }
+
   }
 
   def readJson (org: String): String = {

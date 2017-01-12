@@ -7,13 +7,14 @@ object ScalaBuild extends Build {
   val sparkVersion = "2.0.2"
 
 
-  lazy val gitAnalyticsProject = defineProject(scalaProject, "git-analytics")
+  lazy val gitAnalyticsProject = defineProject(akkaProject, "git-analytics")
     .dependsOn(gitHubProject)
     .dependsOn(sparkAppProject) settings (
     mainClass in Compile := Some("rugds.git.analytics.GitAnalyticsMain"),
     libraryDependencies ++= Seq(
       "rugds" %% "service-core" % systemCoreV,
-      "rugds" %% "rest" % systemCoreV
+      "rugds" %% "rest" % systemCoreV,
+      "org.json4s" %% "json4s-jackson" % "3.5.0"
     )
 
   )
