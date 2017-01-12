@@ -6,6 +6,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 import org.json4s.DefaultFormats
 import org.json4s.jackson.JsonMethods.parse
 import rugds.service.Service
+import org.json4s.jackson.Serialization.write
 
 import scala.collection.mutable
 
@@ -75,7 +76,7 @@ class sparkAppClientImpl {
     }
 
     println(result)
-    Tool.writeJson(result.toString(),org + "-results")
+    Tool.writeJson(write(result),org + "-results")
     sc.stop()
   }
 }
