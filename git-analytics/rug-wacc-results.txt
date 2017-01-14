@@ -1,1 +1,1 @@
-[{"course-2016":9.145140823278584},{"2016-Group-03-Flavius-Andrei-Isac_Elena-Alexandra-Ciobca":4.812436449541319}]
+[{"course-2016":9.145140570277785},{"2016-Group-03-Flavius-Andrei-Isac_Elena-Alexandra-Ciobca":4.812437831962799}]

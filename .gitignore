@@ -10,6 +10,3 @@ target/
 
 #macOS
 .DS_Store
-
-#tokens
-gitHub.conf

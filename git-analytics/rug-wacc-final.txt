@@ -1,1 +1,0 @@
-[{"name":"course-2016","size":39251,"language":"Scala","forks_count":0,"open_issues":0,"has_issues":true,"no_languages":6,"no_contribuitors":4,"average_commits":2.0},{"name":"2016-Group-03-Flavius-Andrei-Isac_Elena-Alexandra-Ciobca","size":20655,"language":"Scala","forks_count":1,"open_issues":0,"has_issues":true,"no_languages":6,"no_contribuitors":3,"average_commits":15.0}]

@@ -7,8 +7,9 @@ import org.json4s.DefaultFormats
 import org.json4s.jackson.JsonMethods.parse
 import rugds.service.Service
 import org.json4s.jackson.Serialization.write
-
 import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
+import rugds.git.lib._
 
 /**
   * Created by lex
@@ -22,7 +23,7 @@ case class Repo(
                  open_issues: Int,
                  has_issues: Boolean,
                  no_languages: Int,
-                 no_contribuitors: Int,
+                 no_contributors: Int,
                  average_commits: Float
                )
 
@@ -41,16 +42,19 @@ class sparkAppClientImpl {
     if (repo.language=="Scala") {
       lang = 1
     }
-    val arr = Array(repo.size, lang, repo.open_issues, repo.no_languages, repo.no_contribuitors, repo.average_commits)
+    val arr = Array(repo.size, lang, repo.open_issues, repo.no_languages, repo.no_contributors, repo.average_commits)
     arr
   }
 
   def sparkMagic(org: String) = {
-    val conf = new SparkConf().setAppName("LinearRegressionWithSGDExample").setMaster("local[1]")
+    val conf = new SparkConf().setAppName("LinearRegressionWithSGDExample").setMaster("local[*]")
     val sc = new SparkContext(conf)
 
+    var repos = new ListBuffer[Repo]()
     // Load and parse the data
-    val repos = parse(Tool.readJson(org + "-final")).extract[Seq[Repo]]
+    Tool.readJson(org).split("}").foreach(json =>{
+      repos += parse(json + "}").extract[Repo]
+    })
 
     val lines = Tool.readJson("rug-wacc-grades").split("\n")
     val grades = mutable.Map[String, Float]()
@@ -71,11 +75,9 @@ class sparkAppClientImpl {
     // Evaluate model on training examples and compute training error
     val result = repos.map{ r =>
       val prediction = model.predict(Vectors.dense(parseMyRepo(r).map(_.toDouble)))
-      println(r.name + " " + prediction)
       (r.name, prediction)
     }
 
-    println(result)
     Tool.writeJson(write(result),org + "-results")
     sc.stop()
   }
